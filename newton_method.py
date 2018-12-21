@@ -1,5 +1,5 @@
 import numpy as np
-import math
+from math import exp
 
 # サンプルデータの個数
 N = 100
@@ -15,7 +15,7 @@ SEED = 1
 def f(xy, beta0, beta1):
     fz = 0
     for i in range(N):
-        p = math.exp(beta0 + beta1 * xy[i][0])/(1 + math.exp(beta0 + beta1 * xy[i][0]))
+        p = exp(beta0 + beta1 * xy[i][0])/(1 + exp(beta0 + beta1 * xy[i][0]))
         fz += xy[i][1] - p
     return fz
 
@@ -23,7 +23,7 @@ def f(xy, beta0, beta1):
 def g(xy, beta0, beta1):
     gz = 0
     for i in range(N):
-        p = math.exp(beta0 + beta1 * xy[i][0])/(1 + math.exp(beta0 + beta1 * xy[i][0]))
+        p = exp(beta0 + beta1 * xy[i][0])/(1 + exp(beta0 + beta1 * xy[i][0]))
         gz += xy[i][0] * (xy[i][1] - p)
     return gz
 
@@ -32,7 +32,7 @@ def g(xy, beta0, beta1):
 def dfdbeta0(xy, beta0, beta1):
     dfdbeta0z = 0
     for i in range(N):
-        p = math.exp(beta0 + beta1 * xy[i][0]) / (1 + math.exp(beta0 + beta1 * xy[i][0]))
+        p = exp(beta0 + beta1 * xy[i][0]) / (1 + exp(beta0 + beta1 * xy[i][0]))
         dfdbeta0z += -(p * (1 - p))
     return dfdbeta0z
 
@@ -40,7 +40,7 @@ def dfdbeta0(xy, beta0, beta1):
 def dfdbeta1(xy, beta0, beta1):
     dfdbeta1z = 0
     for i in range(N):
-        p = math.exp(beta0 + beta1 * xy[i][0])/(1 + math.exp(beta0 + beta1 * xy[i][0]))
+        p = exp(beta0 + beta1 * xy[i][0])/(1 + exp(beta0 + beta1 * xy[i][0]))
         dfdbeta1z += -(xy[i][0] * p * (1 - p))
     return dfdbeta1z
 
@@ -48,7 +48,7 @@ def dfdbeta1(xy, beta0, beta1):
 def dgdbeta0(xy, beta0, beta1):
     dgdbeta0z = 0
     for i in range(N):
-        p = math.exp(beta0 + beta1 * xy[i][0]) / (1 + math.exp(beta0 + beta1 * xy[i][0]))
+        p = exp(beta0 + beta1 * xy[i][0]) / (1 + exp(beta0 + beta1 * xy[i][0]))
         dgdbeta0z += -(xy[i][0] * p * (1 - p))
     return dgdbeta0z
 
@@ -56,7 +56,7 @@ def dgdbeta0(xy, beta0, beta1):
 def dgdbeta1(xy, beta0, beta1):
     dgdbeta1z = 0
     for i in range(N):
-        p = math.exp(beta0 + beta1 * xy[i][0]) / (1 + math.exp(beta0 + beta1 * xy[i][0]))
+        p = exp(beta0 + beta1 * xy[i][0]) / (1 + exp(beta0 + beta1 * xy[i][0]))
         dgdbeta1z += -(xy[i][0] * p * (1 - p))
     return dgdbeta1z
 
