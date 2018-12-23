@@ -68,7 +68,7 @@ def newton_method():
     xy = np.random.rand(N, 2)
     # beta0とbeta1の初期値を設定
     beta0, beta1 = 1.0, 1.0
-    # 乱数の値でxが0.5を超えていた場合はyを1に、0.5を超えていない場合はyを0にする
+    # 乱数の値でyが0.5を超えていた場合はyを1に、0.5を超えていない場合はyを0にする
     for i in range(N):
         if xy[i][1] >= 0.5:
             xy[i][1] = 1.0
@@ -80,7 +80,7 @@ def newton_method():
 
     # ニュートン法の更新則に従ってβベクトル【beta_vec_k】を更新していく
     for k in range(K):
-        print(k, '回目')
+        print('【%d回目】' % k)
         # 元の関数fとgのベクトル(f, g)の転置行列を生成
         fg = np.array([f(xy, beta_vec_k[0], beta_vec_k[1]), g(xy, beta_vec_k[0], beta_vec_k[1])]).T
         # 各関数を各変数で偏微分して得られる行列【m】を生成
@@ -88,10 +88,10 @@ def newton_method():
                       [dgdbeta0(xy, beta_vec_k[0], beta_vec_k[1]), dgdbeta1(xy, beta_vec_k[0], beta_vec_k[1])]])
         # 【m】の逆行列【m_inv】を生成
         m_inv = np.linalg.inv(m)
-        # ニュートン法の更新則で(k+1)番目のβベクトルを生成
+        # ニュートン法の更新則で(k+1)番目のβベクトルを生成し、出力
         beta_vec_k_1 = beta_vec_k - np.dot(m_inv, fg)
-        print('β(k)', beta_vec_k)
-        print('β(k+1)', beta_vec_k_1)
+        print('k： β0 = %lf, β1 = %lf' % (beta_vec_k[0], beta_vec_k[1]))
+        print('k+1： β0 = %lf, β1 = %lf' % (beta_vec_k_1[0], beta_vec_k_1[1]))
         # k番目のβベクトルの各要素と(k+1)番目のβベクトルの各要素の差をとって差が終端条件L以下であれば探索終了し、超えていれば次の探索を開始
         if abs(beta_vec_k_1[0] - beta_vec_k[0]) <= L and abs(beta_vec_k_1[1] - beta_vec_k[1]) <= L:
             break
