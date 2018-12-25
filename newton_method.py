@@ -8,7 +8,7 @@ K = 20
 # 終端条件
 L = 0.0001
 # 乱数のシード
-SEED = 1
+SEED = 2
 
 
 # 関数f,g
@@ -57,7 +57,7 @@ def dgdbeta1(xy, beta0, beta1):
     dgdbeta1z = 0
     for i in range(N):
         p = exp(beta0 + beta1 * xy[i][0]) / (1 + exp(beta0 + beta1 * xy[i][0]))
-        dgdbeta1z += -(xy[i][0] * p * (1 - p))
+        dgdbeta1z += -(xy[i][0]**2 * p * (1 - p))
     return dgdbeta1z
 
 
